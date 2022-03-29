@@ -6,7 +6,7 @@ import "./Shop.css";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  // console.log(products);
+  // console.log(cart);
 
   useEffect(() => {
     fetch("data.json")
@@ -15,11 +15,27 @@ const Shop = () => {
   }, []);
 
   const handleAddToCart = (selectedProduct) => {
-    console.log("Add to cart");
+    let newCart = [];
+    let quantity = selectedProduct.quantity;
+    // console.log(quantity);
+    const exists = cart.find(product => product.id == selectedProduct.id)
+    if (exists) {
+      const rest = cart.filter(product => product.id != selectedProduct.id);
+      selectedProduct.quantity = quantity + 1;
+      newCart = [...rest, selectedProduct];
+    } else {
+      selectedProduct.quantity = 1;
+      newCart = [...cart, selectedProduct]
+    }
+    setCart(newCart)
+    // const newCart = [...cart, selectedProduct];
+    // setCart(newCart);
+    // console.log(selectedProduct);
   };
+  // console.log(cart);
 
   const handleClearCart = () => {
-    console.log("Delete");
+    setCart([])
   };
 
   return (
