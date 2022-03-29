@@ -28,11 +28,7 @@ const Shop = () => {
       newCart = [...cart, selectedProduct]
     }
     setCart(newCart)
-    // const newCart = [...cart, selectedProduct];
-    // setCart(newCart);
-    // console.log(selectedProduct);
   };
-  // console.log(cart);
 
   const handleClearCart = () => {
     setCart([])
