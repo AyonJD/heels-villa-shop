@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
+import { addToLocalStorage } from "../Utilities/fakedb";
 import "./Shop.css";
 
 const Shop = () => {
@@ -27,7 +28,10 @@ const Shop = () => {
       selectedProduct.quantity = 1;
       newCart = [...cart, selectedProduct]
     }
-    setCart(newCart)
+    setCart(newCart);
+
+    // Local Storege------------>
+    addToLocalStorage(selectedProduct.id)
   };
 
   const handleClearCart = () => {
