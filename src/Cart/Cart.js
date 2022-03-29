@@ -4,6 +4,16 @@ import { IoTrashBin } from "react-icons/io5";
 
 const Cart = ({ cart, products, handleClearCart }) => {
   const [random, setRandom] = useState({});
+  const [free, setFree] = useState(false);
+
+  useEffect(() => {
+    //Random product ta 1 bar generate kora hoye gale tar key er length > 0 hobe. jehetu 1 bar er besi generate korte dibo na tai > 0 hole disable kore dibo
+    if (Object.keys(random).length > 0) {
+      setFree(false)
+    } else {
+      setFree(true)
+    }
+  }, [random])
 
   const generateOffer = productsArray => {
     const randomIndex = Math.floor(Math.random() * productsArray.length);
@@ -34,7 +44,10 @@ const Cart = ({ cart, products, handleClearCart }) => {
           </div>
         </div>
       ))}
-      <button onClick={() => generateOffer(products)} className="offer-button">
+      <button onClick={() => generateOffer(products)}
+        className={free ? "offer-button" : "offer-button-disabled"}
+        disabled={!free}
+      >
         Get One for Free
       </button>
       {/* Random free product */}
